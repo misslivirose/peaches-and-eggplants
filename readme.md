@@ -10,6 +10,9 @@ The speed correlates to the number of points that you've scored. The number of d
 ## Design & Implementation
 I wanted this to be in a playable state within three hours, and it had to work completely offline. The only help I got was from the files on my local machine and the kindness of my seatmates to help me out. Shout out to [VS Code](https://code.com) for having some pretty great autocomplete features built-in. Before I started coding, I sketched out a little design document on a notepad that let me choose what I wanted my gameplay to be like. I wound up with this style of game because I figured it would be enough to get me going without needing to add too much complex logic.
 
+## Running the game locally
+This whole game is client-only, so if you want to use this as the base for your own basic clicking + matching game, you can grab the source code by forking it to your GitHub account, cloning it locally to your machine, and opening up the HTML page in your browser. No server or Node.js required! 
+
 ## A few gotchas
 If you're just starting out with programming or JavaScript, I've outlined a couple of tricks and easy 'gotchas' that can happen with JS development: 
 
