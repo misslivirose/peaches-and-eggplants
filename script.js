@@ -1,5 +1,4 @@
-var EGGPLANT = '🍆';
-var PEACH = '🍑';
+var EMOJIS = ['🍆', '🍑', '💋', '😏' ]
 
 var POSITIVE_POINTS = 5;
 var NEGATIVE_POINTS = -3;
@@ -7,9 +6,12 @@ var CHANGE_RATES = [5000, 4000, 3000, 2000];
 var INITIAL_MOVE_RATE = 2000;
 
 var score = 0;
+var numActiveEmojis = 2;
+
 var activeEmoji = EGGPLANT; 
 
 var changeRate;
+var iconInterval, buttonInterval;
 
 function createNewPosition() {
     var x_max = window.innerWidth - 64;
@@ -22,8 +24,8 @@ function createNewPosition() {
 }
 
 function updateSpeed() {
-    window.clearInterval(changeActiveEmoji);
-    window.setInterval(changeActiveEmoji, changeRate);
+    window.clearInterval(iconInterval);
+    iconInterval = window.setInterval(changeActiveEmoji, changeRate);
 }
 
 function updateScoreDisplay() {
@@ -38,33 +40,40 @@ function updateScoreDisplay() {
     } else if (score > 200) {
         expectedChangeRate = CHANGE_RATES[3];
     }
-    if (expectedChangeRate != changeRate) {
+    if (expectedChangeRate !== changeRate) {
+        changeRate = expectedChangeRate;
         updateSpeed();
     }
 }
 
 function changeActiveEmoji() {
-    activeEmoji = Math.round(Math.random()) === 1 ? EGGPLANT : PEACH;
+    if (score >=25 && score % 25 === 0) {
+        if (numActiveEmojis < EMOJIS.length) {
+            numActiveEmojis++;
+        }
+    }
+    activeEmoji = EMOJIS[Math.round(Math.random() * (numActiveEmojis -1))];
     document.getElementById('activeEmoji').innerText = activeEmoji;
 }
 
 function changeButtonEmoji() {
-    var buttonEmoji = Math.round(Math.random()) === 1 ? EGGPLANT : PEACH
+    var buttonEmoji = EMOJIS[Math.round(Math.random() * (numActiveEmojis -1))];
     document.getElementById('activeButton').value = buttonEmoji;
     createNewPosition();
 }
 
 function clickHandler() {
     document.getElementById('activeButton').value === activeEmoji ? score += POSITIVE_POINTS : score += NEGATIVE_POINTS;
+    window.clearInterval(buttonInterval);
+    buttonInterval = window.setInterval(changeButtonEmoji, INITIAL_MOVE_RATE);
     changeButtonEmoji();
     updateScoreDisplay();
 }
 
 function onloaded() {
-    console.log('I loaded');
     changeRate = CHANGE_RATES[0];
-    //window.setInterval(changeActiveEmoji, changeRate);
-    //window.setInterval(changeButtonEmoji, INITIAL_MOVE_RATE);
+    iconInterval = window.setInterval(changeActiveEmoji, changeRate);
+    buttonInterval = window.setInterval(changeButtonEmoji, INITIAL_MOVE_RATE);
 }
 
 
