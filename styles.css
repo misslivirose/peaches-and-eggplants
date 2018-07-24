@@ -25,10 +25,19 @@
 
 .moving {
     position: absolute;
+    font-size: 64px;
+    background: none;
+    border: none;
+    outline: none;
 }
 
 .gameboard {
     width: 100%;
     height: 90%;
     background-color: aquamarine;
+}
+
+h1 {
+    margin: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

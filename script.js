@@ -12,8 +12,8 @@ var activeEmoji = EGGPLANT;
 var changeRate;
 
 function createNewPosition() {
-    var x_max = window.innerWidth;
-    var y_max = window.innerHeight - 64;
+    var x_max = window.innerWidth - 64;
+    var y_max = window.innerHeight - 128;
 
     var newX = Math.round(Math.random() * x_max);
     var newY = Math.round(Math.random() * y_max);
@@ -63,8 +63,8 @@ function clickHandler() {
 function onloaded() {
     console.log('I loaded');
     changeRate = CHANGE_RATES[0];
-    window.setInterval(changeActiveEmoji, changeRate);
-    window.setInterval(changeButtonEmoji, INITIAL_MOVE_RATE);
+    //window.setInterval(changeActiveEmoji, changeRate);
+    //window.setInterval(changeButtonEmoji, INITIAL_MOVE_RATE);
 }
 
 
