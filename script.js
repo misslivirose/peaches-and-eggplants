@@ -3,7 +3,7 @@ var PEACH = '🍑';
 
 var POSITIVE_POINTS = 5;
 var NEGATIVE_POINTS = -3;
-var INITAL_CHANGE_RATE = 5000;
+var CHANGE_RATES = [5000, 4000, 3000, 2000];
 var INITIAL_MOVE_RATE = 2000;
 
 var score = 0;
@@ -21,8 +21,26 @@ function createNewPosition() {
     document.getElementById('activeButton').setAttribute('style', 'margin-left: ' + newX + "px; margin-top: " + newY + "px");
 }
 
+function updateSpeed() {
+    window.clearInterval(changeActiveEmoji);
+    window.setInterval(changeActiveEmoji, changeRate);
+}
+
 function updateScoreDisplay() {
     document.getElementById('score').innerText = "Score: " + score;
+    var expectedChangeRate;
+    if (score <= 50) {
+        expectedChangeRate = CHANGE_RATES[0];
+    } else if (score > 50 && score <= 100) {
+        expectedChangeRate = CHANGE_RATES[1];
+    } else if (score > 100 && score <= 200) {
+        expectedChangeRate = CHANGE_RATES[2];
+    } else if (score > 200) {
+        expectedChangeRate = CHANGE_RATES[3];
+    }
+    if (expectedChangeRate != changeRate) {
+        updateSpeed();
+    }
 }
 
 function changeActiveEmoji() {
@@ -44,7 +62,7 @@ function clickHandler() {
 
 function onloaded() {
     console.log('I loaded');
-    changeRate = INITAL_CHANGE_RATE;
+    changeRate = CHANGE_RATES[0];
     window.setInterval(changeActiveEmoji, changeRate);
     window.setInterval(changeButtonEmoji, INITIAL_MOVE_RATE);
 }
